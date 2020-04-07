@@ -19,4 +19,5 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('demo.urls')),
+    path('', include('demo_react.urls')),
 ]

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
 
     'demo.apps.DemoConfig',
+    'demo_react',
 ]
 
 MIDDLEWARE = [
