@@ -2,12 +2,15 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.tsx$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader"
+          loader: "ts-loader"
         }
       }
     ]
-  }
+  },
+  resolve: {
+    extensions: [".tsx", ".ts", ".js"]
+  },
 };

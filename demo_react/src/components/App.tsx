@@ -1,17 +1,28 @@
-import React, { Component } from "react";
+import React from 'react';
 import { render } from "react-dom";
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: [],
-      loaded: false,
-      placeholder: "Loading"
-    };
-  }
+interface DemoData {
+  id: number;
+  name: string;
+}
 
-  componentDidMount() {
+interface Props {
+}
+
+interface State {
+  data: Array<DemoData>;
+  loaded: boolean;
+  placeholder: string
+}
+
+export default class App extends React.Component<Props, State> {
+  state: State = {
+    data: [],
+    loaded: false,
+    placeholder: "Loading"
+  };
+
+  public componentDidMount(): void {
     fetch("api/demo")
       .then(response => {
         if (response.status > 400) {
@@ -31,13 +42,13 @@ class App extends Component {
       });
   }
 
-  render() {
+  public render(): JSX.Element {
     return (
       <ul>
         {this.state.data.map(contact => {
           return (
             <li key={contact.id}>
-              {contact.name} - {contact.email}
+              {contact.name}
             </li>
           );
         })}
@@ -45,8 +56,6 @@ class App extends Component {
     );
   }
 }
-
-export default App;
 
 const container = document.getElementById("app");
 render(<App />, container);
