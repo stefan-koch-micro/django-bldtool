@@ -1,0 +1,6 @@
+[run]
+omit=
+    */wsgi.py
+    */asgi.py
+    */migrations/*
+    */flycheck*.py
