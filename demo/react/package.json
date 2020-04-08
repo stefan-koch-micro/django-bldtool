@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack --mode development ./src/index.js --output ./static/demo_react/main.js",
-    "build": "webpack --mode production ./src/index.js --output ./static/demo_react/main.js"
+    "dev": "webpack --mode development ./src/index.js --output ../static/demo/main.js",
+    "build": "webpack --mode production ./src/index.js --output ../static/demo/main.js"
   },
   "keywords": [],
   "author": "",

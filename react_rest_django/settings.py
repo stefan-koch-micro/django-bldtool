@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'rest_framework',
 
     'demo.apps.DemoConfig',
-    'demo_react',
     'react_rest_django',
 ]
 
