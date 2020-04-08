@@ -1,21 +1,17 @@
 import React from 'react';
-import { render } from "react-dom";
 
 interface DemoData {
   id: number;
   name: string;
 }
 
-interface Props {
-}
-
 interface State {
-  data: Array<DemoData>;
+  data: DemoData[];
   loaded: boolean;
   placeholder: string
 }
 
-export default class App extends React.Component<Props, State> {
+export default class App extends React.Component<{}, State> {
   state: State = {
     data: [],
     loaded: false,
@@ -56,6 +52,3 @@ export default class App extends React.Component<Props, State> {
     );
   }
 }
-
-const container = document.getElementById("app");
-render(<App />, container);

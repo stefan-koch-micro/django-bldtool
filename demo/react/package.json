@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack --mode development ./src/index.js --output ../static/demo/main.js",
-    "build": "webpack --mode production ./src/index.js --output ../static/demo/main.js"
+    "dev": "webpack --mode development ./src/index.tsx --output ../static/demo/main.js",
+    "build": "webpack --mode production ./src/index.tsx --output ../static/demo/main.js"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +20,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "ts-loader": "^6.2.2",
+    "tslint": "^6.1.1",
     "typescript": "^3.8.3",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11"

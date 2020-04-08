@@ -1,4 +1,5 @@
 """Command handler for lint on the whole project."""
+import glob
 import os
 import subprocess
 from django.core.management.base import BaseCommand, CommandError
@@ -10,6 +11,16 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         modules = [o for o in os.listdir('.')
                    if os.path.isdir(o) and os.path.exists(o+'/__init__.py')]
-        ret = subprocess.call(['pylint', '-rn'] + modules)
-        if ret:
-            raise CommandError("Code not pylint clean (%d)" % ret)
+        pylint_ret = subprocess.call(['pylint', '-rn'] + modules)
+
+        modules = [o for o in os.listdir('.')
+                   if os.path.isdir(o) and os.path.exists(o+'/react/')]
+        tslint_ret = 0
+        for mod in modules:
+            tslint_ret |= subprocess.call([
+                f'{mod}/react/node_modules/.bin/tslint',
+                '-c', f'{mod}/react/tslint.json',
+            ] + glob.glob(f'{mod}/react/src/**/*.tsx', recursive=True))
+
+        if pylint_ret or tslint_ret:
+            raise CommandError("Code not lint clean")
