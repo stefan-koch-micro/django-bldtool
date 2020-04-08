@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
     'demo.apps.DemoConfig',
     'demo_react',
+    'react_rest_django',
 ]
 
 MIDDLEWARE = [

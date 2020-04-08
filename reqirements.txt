@@ -1,5 +1,6 @@
 appdirs==1.4.3
 asgiref==3.2.7
+astroid==2.3.3
 CacheControl==0.12.6
 certifi==2019.11.28
 chardet==3.0.4
@@ -11,11 +12,17 @@ Django==3.0.5
 djangorestframework==3.11.0
 html5lib==1.0.1
 idna==2.8
+isort==4.3.21
+lazy-object-proxy==1.4.3
 lockfile==0.12.2
+mccabe==0.6.1
 msgpack==0.6.2
 packaging==20.3
 pkg-resources==0.0.0
 progress==1.5
+pylint==2.4.4
+pylint-django==2.0.14
+pylint-plugin-utils==0.6
 pyparsing==2.4.6
 pytoml==0.1.21
 pytz==2019.3
@@ -25,3 +32,4 @@ six==1.14.0
 sqlparse==0.3.1
 urllib3==1.25.8
 webencodings==0.5.1
+wrapt==1.11.2

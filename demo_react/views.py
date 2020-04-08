@@ -1,3 +1,4 @@
+"""The standard django views"""
 from django.shortcuts import render
 
 def index(request):
