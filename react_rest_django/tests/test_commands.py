@@ -6,7 +6,6 @@ from django.test import TestCase
 from django.core.management import call_command
 from django.core.management.base import CommandError
 
-# Create your tests here.
 class LintTest(TestCase):
     """Tests for the lint command"""
 
@@ -41,10 +40,21 @@ class CoverageTest(TestCase):
 
         # make sure assert if there is not 100% coverage.
         mock_call.side_effect = lambda args: 0
-        mock_run.return_value = namedtuple("mock", ["stdout"])(stdout='{"totals": {"missing_lines": 2}}')
+        mock_run.return_value = namedtuple("mock", ["stdout"])(
+            stdout='{"totals": {"missing_lines": 2}}')
         self.assertRaises(CommandError, call_command, 'coverage')
 
         # make sure no assert if there is 100% coverage.
         mock_call.side_effect = lambda args: 0
-        mock_run.return_value = namedtuple("mock", ["stdout"])(stdout='{"totals": {"missing_lines": 0}}')
+        mock_run.return_value = namedtuple("mock", ["stdout"])(
+            stdout='{"totals": {"missing_lines": 0}}')
         call_command('coverage')
+
+class QCTest(TestCase):
+    """Tests for the qc command"""
+
+    @mock.patch('django.core.management.call_command')
+    def test_command_calls(self, mock_call):
+        """Make sure the qc command calls both lint and coverage."""
+        call_command('qc')
+        self.assertEqual(mock_call.call_args_list, [mock.call('lint'), mock.call('coverage')])
