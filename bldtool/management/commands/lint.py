@@ -11,7 +11,10 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         modules = [o for o in os.listdir('.')
                    if os.path.isdir(o) and os.path.exists(o+'/__init__.py')]
-        pylint_ret = subprocess.call(['pylint', '-rn'] + modules)
+        pylint_ret = subprocess.call([
+            'pylint',
+            f'--rcfile={os.path.dirname(__file__)}/../../config/pylintrc',
+            '-rn'] + modules)
 
         modules = [o for o in os.listdir('.')
                    if os.path.isdir(o) and os.path.exists(o+'/react/')]

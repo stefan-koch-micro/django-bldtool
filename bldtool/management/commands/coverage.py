@@ -1,5 +1,6 @@
 """Command handler for test coverage on the whole project."""
 import json
+import os
 import subprocess
 from django.core.management.base import BaseCommand, CommandError
 
@@ -10,12 +11,19 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         # Make sure all the tests pass.
         subprocess.call(['coverage', 'erase'])
-        ret = subprocess.call(['coverage', 'run', '--source=.', 'manage.py', 'test'])
+        ret = subprocess.call([
+            'coverage', 'run',
+            f'--rcfile={os.path.dirname(__file__)}/../../config/coveragerc',
+            '--source=.',
+            'manage.py', 'test',
+        ])
         if ret:
             raise CommandError("Code not Tests did not pass.")
 
         # if there were no errors, show the results and look for coverage.
-        subprocess.call(['coverage', 'html'])
+        subprocess.call([
+            'coverage', 'html',
+        ])
         subprocess.call(['coverage', 'report'])
         data = json.loads(
             subprocess.run(['coverage', 'json', '-o', '-'],
