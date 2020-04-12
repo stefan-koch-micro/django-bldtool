@@ -58,3 +58,26 @@ class QCTest(TestCase):
         """Make sure the qc command calls both lint and coverage."""
         call_command('qc')
         self.assertEqual(mock_call.call_args_list, [mock.call('lint'), mock.call('coverage')])
+
+class DocTest(TestCase):
+    """Tests for the doc command"""
+
+    @mock.patch('os.mkdir')
+    @mock.patch('os.path.exists')
+    @mock.patch('os.system')
+    def test_command_calls(self, mock_system, mock_exists, mock_mkdir):
+        """Make sure the arguments work for doc"""
+        call_command('doc')
+        mock_system.assert_called()
+
+        mock_exists.return_value = True
+        self.assertRaises(
+            CommandError,
+            call_command, 'doc', '--init-dev', '--init-user'
+        )
+
+        with mock.patch('builtins.open', mock.mock_open()):
+            mock_mkdir.return_value = None
+            mock_exists.return_value = False
+            call_command('doc', '--init-dev', '--init-user')
+            mock_mkdir.assert_called()
